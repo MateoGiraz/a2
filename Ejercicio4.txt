@@ -1,0 +1,5 @@
+un grafo es triconexo cuando luego de eliminar dos vértices cualesquiera, el grafo continúa siendo conexo.
+
+para cada arista => saco una arista
+para cada arista menos la que saque => saco otra arista
+checkeo si el grafo es conexo 
