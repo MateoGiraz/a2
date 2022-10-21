@@ -20,10 +20,14 @@ public class Ejercicio3 {
     }    
     
     int numOfExcluded = Integer.parseInt(myScanner.nextLine());
+    int[] excluded = new int[numOfExcluded];
     for(int i = 0; i < numOfExcluded; i++){
-      int excluded = myScanner.nextInt();
+      int elemExcluded = myScanner.nextInt();
+          excluded[i] = elemExcluded;
     }
 
     myScanner.close();
+
+
   }
 }

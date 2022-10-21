@@ -12,7 +12,7 @@ public class Ejercicio2 {
       newArr[i] = myScanner.nextInt();
     }
 
-    Heap myHeap = new MaxHeap();
+    Heap myHeap = new MaxHeap(newArr.length+1);
     myHeap.heapify(newArr);
     myHeap.heapSort();
 

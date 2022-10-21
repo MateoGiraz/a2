@@ -3,7 +3,12 @@ package tads;
 public class MaxHeap implements Heap{
   
   private int[] arr;
-  int totalElements = 0;
+  int totalElements;
+
+  public MaxHeap(int max){
+    totalElements = 0;
+    arr = new int[max+1];
+  }
 
   private boolean hasLeftChild(int index){
     return index*2 < arr.length;
@@ -14,6 +19,10 @@ public class MaxHeap implements Heap{
 
   private int getRightChild(int index){
     return arr[index*2+1];
+  }
+
+  private int getParent(int index){
+    return index/2;
   }
 
   private void doSink(int i, int elements){
@@ -32,6 +41,7 @@ public class MaxHeap implements Heap{
     }
   }
 
+  
   private void swap(int index1, int index2){
     int temp = arr[index1];
     arr[index1] = arr[index2];
@@ -49,10 +59,27 @@ public class MaxHeap implements Heap{
   public void heapSort(){
     for(int i = arr.length-1; i > 0; i--) pop();
   }
-
-  private void pop(){
+  
+  @Override
+  public int pop() {
+    int ret = arr[1];
     swap(1, this.totalElements);
     this.totalElements--;
     doSink(1, this.totalElements);
-  }  
+    return ret;
+  }
+
+  @Override
+  public void insert(int data) {
+    if(totalElements >= arr.length) return;
+    
+    totalElements++;
+    arr[totalElements]=data;
+    int aux=totalElements;
+    while(arr[aux]>arr[getParent(aux)]){
+      swap(aux,getParent(aux));
+      aux=getParent(aux);
+    }
+  }
+
 }
