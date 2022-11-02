@@ -7,7 +7,7 @@ public class Ejercicio3 {
     int numOfV = Integer.parseInt(myScanner.nextLine());
     int numOfE = Integer.parseInt(myScanner.nextLine());
   
-    Graph g = new LinkedGraph(numOfE);
+    Graph g = new LinkedGraph(numOfV);
 
     for(int i = 0; i < numOfE; i++){
       String[] input = myScanner.nextLine().split(" ");
