@@ -1,5 +1,5 @@
 package tads;
-
+import java.util.*;
 public class LinkedList<T> implements List<T> {
   private int totalElements;
   private Node head;
@@ -38,4 +38,45 @@ public class LinkedList<T> implements List<T> {
     head = newNode;
   }
   
+  @Override
+  public Iterable<T> data() {
+    return new Iterable<T>(){
+
+      @Override
+      public Iterator<T> iterator() {
+        return new LinkedListIterator();
+      }
+      
+    };
+  }
+  
+  class LinkedListIterator implements Iterator<T>{
+
+    private Node head;
+    int nodesLeft;
+
+    public LinkedListIterator(){
+      this.head = head;
+      this.nodesLeft=totalElements;
+    }
+
+    @Override
+    public boolean hasNext() {
+      return nodesLeft > 0;
+    }
+
+    @Override
+    public T next() {
+      while(head != null){
+        T current =head.data;
+        head = head.next;
+        
+        nodesLeft--;
+        return current;
+      }
+      return null;
+    }
+
+  }
+
 }

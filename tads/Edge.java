@@ -1,12 +1,14 @@
 package tads;
 
 public class Edge {
+  public int vOrigen;
   public int vDest;
   public int weight;
 
-  public Edge(int v, int w){
-    vDest = v;
-    weight = w;
+  public Edge(int v, int w,int x){
+    vOrigen=v;
+    vDest = w;
+    weight = x;
   }
   @Override
   public boolean equals(Object o){
