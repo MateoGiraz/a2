@@ -20,15 +20,9 @@ public class Ejercicio4 {
     }
     boolean connected = true;
 
-    for(int i = 1; i <= numOfV; i++){
-      for(int j = 1; j < numOfV; j++){
-        g.removeEdge(i, j);
-        g.removeEdge(j, i);
-        connected = connected && isConnected(g);
-        g.addEdge(i, j, 1);
-        g.addEdge(j, i, 1);
-
-      }
+    for(int i = 1; i <= numOfV && connected; i++){
+      for(int j = 1; j <= numOfV && connected; j++)
+        connected = connected && isConnected(g, i, j);
     }
 
     String res = connected ? "1" : "0";
@@ -37,20 +31,31 @@ public class Ejercicio4 {
 
   }
 
-  public static boolean isConnected(Graph g){
-    boolean visited[] = new boolean[g.size()+1];
-    for(boolean item : visited) item = false;
-    dfs(g, 1, visited);
+  public static boolean isConnected(Graph g, int i, int j){
+    boolean visited[] = new boolean[g.size()];
+    visited[0] = true;
+    visited[i] = true;
+    visited[j] = true;
+    int min = getMinValue(i,j);
+    dfs(g, min, visited, i, j);
     for(boolean elem : visited) if(!elem) return false;
     return true;
   }
 
-  public static void dfs(Graph g, int v, boolean[] visited){
+  public static void dfs(Graph g, int v, boolean[] visited, int i, int j){
+    if(v == i || v == j) return;
     visited[v] = true;
-    for(Edge e : g.edges(v))
+    for(Edge e : g.edges(v)){
       if(!visited[e.vDest]){
-        dfs(g, e.vDest, visited);
+        dfs(g, e.vDest, visited, i, j);
       }
+    }
+  }
+
+  public static int getMinValue(int i, int j){
+    int min = 1;
+    while(min == i || min == j) min++;
+    return min;
   }
 
 }

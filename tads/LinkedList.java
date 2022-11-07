@@ -38,6 +38,17 @@ public class LinkedList<T> implements List<T> {
     head = newNode;
   }
   
+
+  public void remove(T data){
+    if(head == null) return;
+    if(head.equals(data)) head = null;
+    Node aux = head;
+    while(!aux.next.equals(data)) aux = aux.next;
+    if(aux.next == null) return;
+    aux.next = aux.next.next;
+  }
+  
+
   @Override
   public Iterable<T> data() {
     return new Iterable<T>(){
@@ -49,7 +60,7 @@ public class LinkedList<T> implements List<T> {
       
     };
   }
-  
+
   class LinkedListIterator implements Iterator<T>{
 
     private Node head;

@@ -1,6 +1,6 @@
 package tads;
  
-class DisjointSet {
+public class DisjointSet {
   int[] sets;
   int numOfElems;
  

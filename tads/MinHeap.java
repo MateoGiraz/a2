@@ -25,8 +25,9 @@ public class MinHeap implements EdgeHeap{
     public void insert(Edge data) {
         if(elements!=maxElements){
             elements++;
-            arr[elements]=data;
+            arr[elements]=new Edge(data.vOrigen,data.vDest,data.weight);
             int aux=elements;
+            int parent=getParent(elements);
             while(arr[aux].weight<arr[getParent(aux)].weight){
                 swap(aux,getParent(aux));
                 aux=getParent(aux);
@@ -85,7 +86,10 @@ public class MinHeap implements EdgeHeap{
         //Auxiliares
 
         private int getParent(int pos){
-            return (pos-1)/2;
+            if(pos!=1){
+            return Math.floorDiv(pos,2);
+            }
+            return 1;
         }
     
         private boolean hasLeftChild(int pos){

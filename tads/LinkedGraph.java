@@ -1,19 +1,19 @@
 package tads;
-import tads.*;
-
-import java.util.Iterator;
 
 public class LinkedGraph implements Graph {
 
-
   private int totalElems;
   private int edges;
-  private LinkedList<Edge>[] arr;
+  private Object[] arr;
 
   public LinkedGraph(int elems){
     edges = 0;
-    totalElems=elems;
-    arr = (LinkedList<Edge>[]) new Object[totalElems+1];
+    totalElems = elems;
+    arr = new Object[totalElems+1];
+
+    for(int i = 0; i < arr.length; i++){
+      arr[i] = new EdgeLinkedList<Edge>();
+    }
   }
 
   @Override
@@ -23,13 +23,14 @@ public class LinkedGraph implements Graph {
 
   @Override
   public void addEdge(int v, int w, int weight) {
-    Edge edge = new Edge(v,w,weight);
-    arr[v].addElement(edge);
+    Edge edge = new Edge(v, w, weight);
+    ((EdgeLinkedList<Edge>)(arr[v])).addElement(edge);
+    edges++;
   }
 
   @Override
   public int edgeCount(int v) {
-    return arr[v].totalElements();
+    return ((EdgeLinkedList<Edge>)(arr[v])).totalElements();
   }
 
   @Override
@@ -39,39 +40,29 @@ public class LinkedGraph implements Graph {
 
   @Override
   public boolean hasEdge(int v, int w) {
-    LinkedList a=arr[v];
-    for(Edge e:edges(v)){
-      if (e.vDest==w){
-        return true;
-      } 
-    }
+    for(Edge e : edges(v))
+      if (e.vDest==w) return true;
     return false;
   }
 
   @Override
   public int getWeight(int v, int w) {
-    int ret = 0;
-    for(Edge e:edges(v)){
-      if (e.vDest==w){
-        return e.weight;
-      }
-
-    
-  }
-  return ret;
+    for(Edge e:edges(v))
+      if (e.vDest==w) return e.weight;
+    return 0;
 }
 
   @Override
   public void removeEdge(int v, int w) {
-
+    Edge e = new Edge(v,w,0);
+    ((EdgeLinkedList<Edge>)(arr[v])).removeElement(e);
+    edges--;
   }
 
   @Override
   public Iterable<Edge> edges(int v) {
-    return arr[v].data();
-      
+    return ((EdgeLinkedList<Edge>)(arr[v])).data();
     };
   }
   
  
-
