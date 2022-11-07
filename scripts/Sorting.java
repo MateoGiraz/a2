@@ -2,37 +2,45 @@ package scripts;
 
 public class Sorting{
   public static void main(String[] args) {
-    int[] array = {1, 2, 6, 7, 2, 6, 8, 3, 4, 5, 7};
-    int[] arr = mergeSort(array, 0, 10);
-    System.out.println(arr);
-  }
-
-  public static int[] mergeSort(int [] arr,int inicio, int fin){
-    int medio=(inicio+fin)/2;
-    int largo=fin-inicio+1;
-    if(largo!=1){
-    mergeSort(arr,inicio,medio);
-    mergeSort(arr,medio+1,fin);
+    int[] arr = {5,4,8,123,3,5,2,6,8,5,3,5,2,5,7,4,132,543,234,74,143,534,654,234};
+    mergeSort(arr, 0, arr.length-1);
+    for(int elem : arr){
+        System.out.println(elem);
     }
-    return merge(arr,inicio,medio,fin);
-
 }
 
-public static int[] merge(int[]arr,int inicio,int medio,int fin){
-    int [] ret= new int[fin-inicio+1];
-    int aux=inicio;
-    int aux2=medio;
-    for (int i = 0; i < ret.length && aux<=medio && aux2<=fin; i++) {
-        if(arr[aux]<arr[aux2]){
-            ret[i]=aux;
-            aux++;
+public static void mergeSort(int[] arr, int start, int end){
+    if(start == end) return;
+    int mid=(start+end)/2;
+    mergeSort(arr,start,mid);
+    mergeSort(arr,mid+1,end);
+    merge(arr,start,mid,end);
+}
+
+public static void merge(int[]arr,int start,int mid,int end){
+    int size1 = mid - start + 1;
+    int size2 = end - mid;
+
+    int[] left = new int[size1];
+    int[] right = new int[size2];
+    
+    for(int i = 0; i < size1; i++) left[i] = arr[i + start]; 
+    for(int i = 0; i < size2; i++) right[i] = arr[mid + i + 1];
+    
+    int i = 0, j = 0;
+    int index = start;
+
+    while(i < size1 && j < size2){
+        if(left[i] <= right[j]){
+            arr[index] = left[i];
+            i++;
+        }else{
+            arr[index] = right[j];
+            j++;
         }
-        else if(arr[aux]>=arr[aux2]){
-            ret[i]=aux2;
-            aux2++;
-        }
+        index++;
     }
-    return ret;
+
 
 }
 }
