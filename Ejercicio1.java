@@ -1,5 +1,6 @@
 import java.util.Scanner;
-import tads.*;
+import tads.ClosedHash;
+import tads.Hash;
 import funciones.*;
 
 public class Ejercicio1 {

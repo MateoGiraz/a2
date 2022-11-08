@@ -1,5 +1,6 @@
 import java.util.Scanner;
-import tads.*;
+import tads.Heap;
+import tads.MaxHeap;
 
 public class Ejercicio2 {
   public static void main(String[] args) {
