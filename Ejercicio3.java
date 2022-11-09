@@ -1,7 +1,7 @@
 import java.util.Scanner;
 import tads.*;
 
-public class v2 {
+public class Ejercicio3 {
     public static void main(String[] args) {  
         Scanner myScanner = new Scanner(System.in);
         int numOfV = Integer.parseInt(myScanner.nextLine());
