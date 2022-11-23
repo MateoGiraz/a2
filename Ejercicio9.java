@@ -13,28 +13,25 @@ public class Ejercicio9 {
     int testCases = myScanner.nextInt();
     for(int i = 0; i < testCases; i++){
       int testCase = myScanner.nextInt();
-      List<Integer> possibleSol = new LinkedList<Integer>();
-      List<Integer> bestSol = new LinkedList<Integer>();
-      List<Integer> res = solveBT(arr, testCase, possibleSol, bestSol);
-      System.out.println(res.size());
+      int res = minBT(arr,0,testCase,0);
+      if(res==Integer.MAX_VALUE){
+        res=0;
+      }
+      System.out.println(res);
     }
 
     myScanner.close();
   }
-  
-  public static List<Integer> solveBT(int[] arr, int m, List<Integer> possibleSol, List<Integer> bestSol){
-    //prune
-    if(m < 0 || (possibleSol.size() >= bestSol.size() && bestSol.size() > 0)) return bestSol;
-    //if sol didnt got pruned, then it's new best. Return new copy of possibleSol
-    if(m == 0) return List.copyOf(possibleSol);
-    
-    for(int i = 0; i < arr.length; i++){
-      possibleSol.add(arr[i]);
-      bestSol = solveBT(arr, m-arr[i], possibleSol, bestSol);
-      possibleSol.remove(Integer.valueOf(arr[i]));
-    }
-
-    return bestSol;
+  public static int minBT(int[] nums,int index,int suma,int cont){
+    if(suma<0|| index==nums.length) return Integer.MAX_VALUE;
+    if(suma==0) return cont;
+    return min(minBT(nums,index+1,suma,cont),minBT(nums, index, suma-nums[index], cont+1));
+  }
+  private static int min(int a, int b) {
+    if(a<b)return a;
+    return b;
   }
 
+
 }
+    
