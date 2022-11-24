@@ -17,6 +17,10 @@ public class Ejercicio2 {
     myHeap.heapify(newArr);
     myHeap.heapSort();
 
+    int temp = newArr[1];
+    newArr[1] = newArr[2];
+    newArr[2] = temp;
+
     for(int i = 1; i < numOfElements+1; i++){
       System.out.println(newArr[i]);
     }
