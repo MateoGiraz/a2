@@ -28,10 +28,7 @@ public static void mergeSort(Pair[] arr, int start, int end){
   int mid=(start+end)/2;
   mergeSort(arr,start,mid);
   mergeSort(arr,mid+1,end);
-  merge(arr,start,mid,end);
-}
-
-public static void merge(Pair[]arr,int start,int mid,int end){
+  
   int size1 = mid - start + 1;
   int size2 = end - mid;
 
@@ -40,31 +37,38 @@ public static void merge(Pair[]arr,int start,int mid,int end){
   
   for(int i = 0; i < size1; i++) left[i] = arr[i + start]; 
   for(int i = 0; i < size2; i++) right[i] = arr[mid + i + 1];
-  
-  int i = 0, j = 0;
-  int index = start;
 
-  while(i < size1 && j < size2){
-      if(left[i].totalIncidence > right[j].totalIncidence){
-          arr[index] = left[i];
-          i++;
-      }else{
-          arr[index] = right[j];
-          j++;
+  merge(arr,start,left,right); //merge 2 sorted arrs into arr
+}
+
+public static void merge(Pair[]arr,int start,Pair[] left,Pair[] right){
+  
+  int leftIndex = 0, rightIndex = 0, index = start;
+
+  while(leftIndex < left.length && rightIndex < right.length){
+      if(left[leftIndex].totalIncidence > right[rightIndex].totalIncidence){
+          arr[index] = left[leftIndex];
+          leftIndex++;
+          index++;
+          continue;
       }
+      arr[index] = right[rightIndex];
+      rightIndex++;
       index++;
   }
 
-  while (i < size1) {
-    arr[index] = left[i];
-    i++;
+  //items left if there where
+  while (leftIndex < left.length) {
+    arr[index] = left[leftIndex];
     index++;
+    leftIndex++;
   }
  
-  while (j < size2) {
-    arr[index] = right[j];
-    j++;
+  //items left if there where
+  while (rightIndex < right.length) {
+    arr[index] = right[rightIndex];
     index++;
+    rightIndex++;
   } 
 
 }
