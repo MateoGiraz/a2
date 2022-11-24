@@ -8,6 +8,7 @@ public class Ejercicio10 {
       for(int i = 0; i < totalElems; i++){
         arr[i] = myScanner.nextLine();
       }
+      myScanner.close();
       for (int i = 0; i < arr.length; i++) {
         for (int j = 0; j < arr.length; j++) {
             String elem1=arr[i];
