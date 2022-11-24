@@ -20,6 +20,7 @@ public class Ejercicio8{
           maximo=a;
         }
       }
+      myScanner.close();
       int [] historial=new int [maximo+1];
   
       for(int elem : testCasesArr){
@@ -30,11 +31,7 @@ public class Ejercicio8{
         int res = historial[elem]==1 ? 1:0;
         System.out.println(res);
       }
-      System.out.println("Historial:");
-      for (int i = 0; i < historial.length; i++) {
-        System.out.println(historial[i]);
-      }
-  
+
     }
     
     public static boolean subSet(int[]historial,int[] arr, int elements, int sum){

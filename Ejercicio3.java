@@ -23,6 +23,7 @@ public class Ejercicio3 {
         for (int i = 0; i < numOfExcluded; i++) {
             excluded[i] = Integer.parseInt(myScanner.nextLine());
         }
+        myScanner.close();
         kruskal(g,excluded);
     }
 
